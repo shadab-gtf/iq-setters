@@ -240,6 +240,8 @@
     });
   }
 
+
+  
   if (window.Lenis) {
     const lenis = new window.Lenis({ autoRaf: false, duration: 1.05, smoothWheel: true, syncTouch: false, anchors: true });
     lenis.on("scroll", ({ scroll, direction }) => {
