@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165 125" fill="#FF0000" role="img" aria-labelledby="title">
+  <title id="title">iQ</title>
+  <rect x="42" y="19" width="17" height="18" rx="3" />
+  <rect x="42" y="40" width="17" height="68" rx="1" />
+  <mask id="q-cutout" maskUnits="userSpaceOnUse" x="64" y="14" width="101" height="101">
+    <rect x="64" y="14" width="101" height="101" fill="#fff" />
+    <circle cx="111" cy="61" r="28" fill="#000" />
+  </mask>
+  <g mask="url(#q-cutout)">
+    <circle cx="111" cy="61" r="44" />
+    <path d="m117 73 34 34 10-10-34-34z" />
+  </g>
+</svg>
