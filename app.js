@@ -175,6 +175,55 @@
     .fromTo(".hero-showcase", { autoAlpha: 0, y: 22, clipPath: "inset(9% 0 0 round 15px)", scale: .99 }, { autoAlpha: 1, y: 0, clipPath: "inset(0% 0 0 round 15px)", scale: 1, duration: .85, ease: "power2.out" }, "-=.08");
 
   if (ScrollTrigger) {
+    const illustrationLoops = [];
+    const playInView = (element, timeline) => {
+      const trigger = ScrollTrigger.create({
+        trigger: element, start: "top bottom", end: "bottom top",
+        onToggle: (state) => timeline.paused(!state.isActive || document.hidden)
+      });
+      illustrationLoops.push({ timeline, trigger });
+    };
+    const orbit = document.querySelector(".process-orbit");
+    if (orbit) {
+      const timeline = gsap.timeline({ paused: true });
+      orbit.querySelectorAll(".orbit-ring").forEach((ring, index) => {
+        timeline.fromTo(ring, { rotation: [-18, 16, -40][index] }, {
+          rotation: index === 1 ? -360 : 360, duration: 10, repeat: -1, ease: "none"
+        }, 0);
+      });
+      playInView(orbit, timeline);
+    }
+    document.querySelectorAll(".decision-visual, .workflow-visual").forEach((visual) => {
+      const timeline = gsap.timeline({ paused: true });
+      const workflow = visual.classList.contains("workflow-visual");
+      [...visual.children].forEach((item, index) => {
+        timeline.fromTo(item, { opacity: 0 }, {
+          opacity: 1, duration: 2, repeat: -1, yoyo: true,
+          ease: workflow && index % 2 ? "power1.out" : "none"
+        }, workflow ? [0, .3, .5, .8, 1][index] : 2 - index);
+      });
+      playInView(visual, timeline);
+    });
+    document.addEventListener("visibilitychange", () => {
+      illustrationLoops.forEach(({ timeline, trigger }) => timeline.paused(document.hidden || !trigger.isActive));
+    });
+    const taskArt = document.querySelector(".task-illustration");
+    if (taskArt && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      const card = taskArt.closest(".benefit-card");
+      const cursors = [...taskArt.querySelectorAll(".task-cursor")].map((cursor) => ({
+        x: gsap.quickTo(cursor, "x", { duration: 1, ease: "power2.out" }),
+        y: gsap.quickTo(cursor, "y", { duration: 1, ease: "power2.out" })
+      }));
+      card.addEventListener("pointermove", (event) => {
+        const bounds = card.getBoundingClientRect();
+        cursors.forEach((cursor, index) => {
+          const direction = index === 0 ? 1 : -.7;
+          cursor.x(((event.clientX - bounds.left) / bounds.width - .5) * 64 * direction);
+          cursor.y(((event.clientY - bounds.top) / bounds.height - .5) * 48 * direction);
+        });
+      });
+      card.addEventListener("pointerleave", () => cursors.forEach((cursor) => { cursor.x(0); cursor.y(0); }));
+    }
     gsap.utils.toArray("[data-reveal]").forEach((element) => {
       if (element.closest(".hero")) return;
       gsap.fromTo(element, { autoAlpha: 0, y: 20 }, {
