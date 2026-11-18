@@ -19,7 +19,7 @@
 .process-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
 .process-card { position: relative; display: flex; min-height: 498px; flex-direction: column; gap: 24px; overflow: hidden; padding: 40px; border-radius: var(--home-radius); background: var(--home-surface); }
 .process-copy { position: relative; z-index: 1; }
-.process-copy > .icon { width: 20px; height: 20px; margin-bottom: 16px; }
+.process-copy > .icon { display: block; width: 20px; height: 20px; margin-bottom: 16px; }
 .process-copy h3, .benefit-copy h3 { margin: 0 0 6px; font-size: 16px; font-weight: 400; line-height: 24px; }
 .process-copy p, .benefit-copy p { margin: 0; color: var(--home-muted); font-size: 16px; line-height: 24px; }
 .process-meeting { display: flex; min-height: 280px; flex-direction: column; justify-content: space-between; gap: 24px; margin-top: auto; margin-bottom: -30px; padding: 24px; border-radius: 20px; background: var(--white); }
@@ -143,7 +143,6 @@
   .process-orbit { max-width: none; }.process-copy { max-width: 420px; }
   .benefits-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }.benefit-card { grid-column: auto; }.benefit-card--calendar { grid-column: 1/-1; min-height: 460px; }.home-calendar-visual { max-width: 330px; margin-inline: auto; }
   .benefit-copy--split { display: block; }.benefit-copy--split br { display: none; }
-  .network-node .icon { width: 24px; height: 24px; }
   .testimonial-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }.testimonial-card, .testimonial-photo { min-height: 460px; }
   .home-contact { padding-top: 80px; }.home-footer { padding-top: 80px; padding-bottom: 50px; }.home-footer-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 40px; }.home-footer-bottom { margin-top: 80px; }
 }
@@ -152,15 +151,15 @@
   .home-process, .home-benefits { padding-bottom: 60px; }.home-testimonials { padding-block: 60px; }
   .home-section-heading h2, .home-contact h2 { font-size: 32px; line-height: 1.15; letter-spacing: -.96px; }.home-section-heading { margin-bottom: 32px; }
   .home-eyebrow { font-size: 12px; }
-  .process-card { padding: 28px; }.process-orbit { width: calc(100% + 56px); margin: auto -28px -28px; }.process-meeting { margin-bottom: 0; padding: 22px; }.launch-checklist { padding: 20px; }
+  .process-card { padding: 20px; border-radius: 16px; }.process-orbit { width: calc(100% + 40px); margin: auto -20px -20px; }.process-meeting { margin-bottom: 0; padding: 22px; }.launch-checklist { padding: 20px; }
   .benefits-heading-row { align-items: start; flex-direction: column; gap: 24px; margin-bottom: 32px; }.benefits-grid, .testimonial-grid { grid-template-columns: 1fr; }
-  .benefit-card { min-height: 466px; padding: 28px; }.benefit-card--wide { min-height: 450px; gap: 24px; }.benefit-card--calendar { grid-column: auto; }.network-paths { object-fit: fill; }
+  .benefit-card { min-height: 0; padding: 20px; gap: 24px; border-radius: 16px; }.benefit-card--calendar { grid-column: auto; }.network-paths { object-fit: fill; }
+  .task-cursor--one { left: -8px; }.task-cursor--two { right: -8px; }.decision-visual strong { font-size: 30px; }.decision-visual > div { padding: 18px; }.home-calendar-visual { padding-inline: 0; }.calendar-agenda { padding-inline: 18px; }
   .testimonial-card, .testimonial-photo { min-height: 410px; }.testimonial-card { padding: 28px; }.review-company { margin-bottom: 32px; }.testimonial-photo { height: 440px; }
   .faq-question { padding: 20px 18px; gap: 12px; font-size: 15px; }.faq-answer p { padding-inline: 18px; font-size: 15px; }
   .home-contact { padding-top: 80px; }.home-footer { padding-top: 80px; }.home-footer-grid { gap: 36px 24px; }.footer-details { grid-column: 1/-1; }.home-footer nav a { font-size: 14px; min-height: 32px; }.home-footer nav { gap: 8px; }.home-footer-grid > nav:last-child { grid-column: 1/-1; }.home-footer-bottom { align-items: start; flex-direction: column; gap: 16px; margin-top: 60px; }.footer-socials a { width: 44px; height: 44px; }.home-footer-bottom p { font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-process *, .home-benefits *, .home-testimonials *, .home-faq *, .home-footer * { transition-duration: .01ms !important; }
+  .home-benefits .decision-visual > div, .home-benefits .workflow-visual > div { opacity: 1; }
 }
-
-@media (max-width: 600px) { .task-cursor--one { left: -8px; }.task-cursor--two { right: -8px; }.decision-visual strong { font-size: 30px; }.decision-visual > div { padding: 18px; }.home-calendar-visual { padding-inline: 0; }.calendar-agenda { padding-inline: 18px; } }
