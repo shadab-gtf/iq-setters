@@ -241,6 +241,24 @@
   }
 
   
+  const marqueeViewport = document.querySelector(".partner-marquee");
+  const marqueeTrack = marqueeViewport?.querySelector(".partner-marquee-track");
+  const marqueeToggle = document.querySelector("[data-marquee-toggle]");
+  if (marqueeTrack && marqueeToggle) {
+    marqueeToggle.addEventListener("click", () => {
+      const nextPlaying = marqueeToggle.dataset.playing !== "true";
+      marqueeToggle.dataset.playing = String(nextPlaying);
+      marqueeToggle.setAttribute("aria-label", nextPlaying ? "Pause the scrolling brand logos" : "Play the scrolling brand logos");
+      marqueeTrack.classList.toggle("is-user-paused", !nextPlaying);
+    });
+  }
+  if (marqueeTrack && "IntersectionObserver" in window) {
+    new IntersectionObserver(
+      (entries) => entries.forEach((entry) => marqueeTrack.classList.toggle("is-paused", !entry.isIntersecting)),
+      { rootMargin: "150px 0px" }
+    ).observe(marqueeViewport);
+  }
+
   if (window.Lenis) {
     const lenis = new window.Lenis({ autoRaf: false, duration: 1.05, smoothWheel: true, syncTouch: false, anchors: true });
     lenis.on("scroll", ({ scroll, direction }) => {
