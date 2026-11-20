@@ -1,0 +1,21 @@
+/*
+ * Reduced-motion safety net.
+ *
+ * Entrance animations are rendered server-side in their "before" state, so a
+ * reduced-motion visitor would otherwise see hidden content until hydration.
+ * These rules settle every animated element in CSS, matching how the static
+ * build behaved when it skipped its animation layer entirely. `!important`
+ * is deliberate: it has to beat the inline styles Framer Motion writes.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal-image],
+  .hero h1,
+  .hero-description,
+  .hero-actions,
+  .hero-showcase {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+}
